@@ -17,6 +17,10 @@ use pocketmine\command\Command;
 use pocketmine\item\Item;
 use pocketmine\scheduler\Task;
 
+/**
+ * Class Auction
+ * @package alvin0319
+ */
 class Auction extends PluginBase{
 
     /** @var array */
@@ -34,7 +38,9 @@ class Auction extends PluginBase{
     /** @var bool */
     public $is = false;
 
+    /** @var array */
     public $task = [];
+
     /** @var string */
     public $prefix = '§e§l[ §f서버 §e] §r';
 
@@ -47,7 +53,15 @@ class Auction extends PluginBase{
         $this->getServer()->getCommandMap()->register('경매 입찰', $this->cmd);
         FA::$server = Server::getInstance();
     }
-    public function onCommand(CommandSender $sender, Command $command, string $label, array $args): bool{
+
+    /**
+     * @param CommandSender $sender
+     * @param Command $command
+     * @param string $label
+     * @param array $args
+     * @return bool
+     */
+    public function onCommand(CommandSender $sender, Command $command, string $label, array $args) : bool{
         if($command->getName() === '경매 시작'){
             if(!$sender instanceof Player){
                 $sender->sendMessage($this->prefix . '콘솔에서는 사용하실수 없습니다');
@@ -113,6 +127,11 @@ class Auction extends PluginBase{
         return true;
     }
 }
+
+/**
+ * Class AuctionTask
+ * @package alvin0319
+ */
 class AuctionTask extends Task{
 
     /** @var Auction */
@@ -201,6 +220,11 @@ class AuctionTask extends Task{
     }
 }
 // fast access class
+
+/**
+ * Class FA
+ * @package alvin0319
+ */
 abstract class FA{
     public static $server;
     public static $prefix = '§e§l[ §f서버 §e] §r';
